@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<!-- null 입력 전면 허용 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.spring.card.vo.UserInfo" alias="userInfo"/>
+		<typeAlias type="com.spring.card.vo.UserInfoCareer" alias="userInfoCareer"/>
+		<typeAlias type="com.spring.card.vo.UserInfoEdu" alias="userInfoEdu"/>
+		<typeAlias type="com.spring.card.vo.UserInfoLicen" alias="userInfoLicen"/>
+		<typeAlias type="com.spring.card.vo.UserInfoProject" alias="userInfoProject"/>
+		<typeAlias type="com.spring.card.vo.UserInfoQualifi" alias="userInfoQualifi"/>
+		<typeAlias type="com.spring.card.vo.UserInfoTraining" alias="userInfoTraining"/>
+	</typeAliases>
+	
+</configuration>
