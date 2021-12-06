@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="card">
+	
+	<resultMap type="userInfo" id="userInfo">
+		<result property="userIdx"					column="USER_IDX" />
+		<result property="userRegisterDate"			column="USER_REGISTER_DATE" />
+		<result property="userName"					column="USER_NAME" />
+		<result property="userSocialSecunum"		column="USER_SOCIAL_SECUNUM" />
+		<result property="userGender"				column="USER_SEX" />
+		<result property="userComp"					column="USER_COMP" />
+		<result property="userCompEnterdate"		column="USER_COMP_ENTERDATE" />
+		<result property="userDept"					column="USER_DEPT" />
+		<result property="userSpot"					column="USER_SPOT" />
+		<result property="userArmyServ"				column="USER_ARMY_SERV" />
+		<result property="userMaritalStatus"		column="USER_MARITAL_STATUS" />
+		<result property="userArmyServEnter"		column="USER_ARMY_SERV_ENTER" />
+		<result property="userArmyServLeave"		column="USER_ARMY_SERV_LEAVE" />
+		<result property="userArmyServPeriod"		column="USER_ARMY_SERV_PERIOD" />
+		<result property="userTelnumWired"			column="USER_TELNUM_WIRED" />
+		<result property="userTelnumWireless"		column="USER_TELNUM_WIRELESS" />
+		<result property="userEmail"				column="USER_EMAIL" />
+		<result property="userZipcode"				column="USER_ZIPCODE" />
+		<result property="userAddress"				column="USER_ADDRESS" />
+	</resultMap>
+	
+	<resultMap type="userInfoCareer" id="userInfoCareer">
+		<result property="careerIdx"				column="CAREER_IDX"/>
+		<result property="userIdx"					column="USER_IDX"/>
+		<result property="careerCompName"			column="CAREER_COMP_NAME"/>
+		<result property="careerEnterdate"			column="CAREER_ENTERDATE"/>
+		<result property="careerLeavedate"			column="CAREER_LEAVEDATE"/>
+		<result property="careerSpot"				column="CAREER_SPOT"/>
+		<result property="careerResponsib"			column="CAREER_RESPONSIB"/>
+	</resultMap>
+	
+	<resultMap type="userInfoEdu" id="userInfoEdu">
+		<result property="eduIdx"					column="EDU_IDX"/>
+		<result property="userIdx"					column="USER_IDX"/>
+		<result property="eduSchoolName"			column="EDU_SCHOOL_NAME"/>
+		<result property="eduStatus"				column="EDU_STATUS"/>
+		<result property="eduDate"					column="EDU_DATE"/>
+	</resultMap>
+	
+	<resultMap type="userInfoLicen" id="userInfoLicen">
+		<result property="licenIdx" 				column="LICEN_IDX"/>
+		<result property="userIdx" 					column="USER_IDX"/>
+		<result property="licenName" 				column="LICEN_NAME"/>
+		<result property="licenSkillLevel" 			column="LICEN_SKILL_LEVEL"/>
+	</resultMap>
+	
+	<resultMap type="userInfoProject" id="userInfoProject">
+		<result property="skillIdx" 				column="SKILL_IDX"/>
+		<result property="userIdx" 					column="USER_IDX"/>
+		<result property="skillProjectName" 		column="SKILL_PROJECT_NAME"/>
+		<result property="skillStartdate" 			column="SKILL_STARTDATE"/>
+		<result property="skillEnddate" 			column="SKILL_ENDDATE"/>
+		<result property="skillCustomerComp" 		column="SKILL_CUSTOMER_COMP"/>
+		<result property="skillWorkComp" 			column="SKILL_WORK_COMP"/>
+		<result property="skillApplied" 			column="SKILL_APPLIED"/>
+		<result property="skillIndustry" 			column="SKILL_INDUSTRY"/>
+		<result property="skillRole" 				column="SKILL_ROLE"/>
+		<result property="skillModel" 				column="SKILL_MODEL"/>
+		<result property="skillOs" 					column="SKILL_OS"/>
+		<result property="skillLang" 				column="SKILL_LANG"/>
+		<result property="skillDbms" 				column="SKILL_DBMS"/>
+		<result property="skillComm" 				column="SKILL_COMM"/>
+		<result property="skillTool" 				column="SKILL_TOOL"/>
+		<result property="skillEtc" 				column="SKILL_ETC"/>
+	</resultMap>
+	
+	<resultMap type="userInfoQualifi" id="userInfoQualifi">
+		<result property="qualifiIdx" 				column="QUALIFI_IDX"/>
+		<result property="userIdx" 					column="USER_IDX"/>
+		<result property="qualifiName" 				column="QUALIFI_NAME"/>
+		<result property="qualifiGetdate" 			column="QUALIFI_GETDATE"/>
+	</resultMap>
+	
+	<resultMap type="userInfoTraining" id="userInfoTraining">
+		<result property="trainingIdx" 				column="TRAINING_IDX"/>
+		<result property="userIdx" 					column="USER_IDX"/>
+		<result property="trainingName" 			column="TRAINING_NAME"/>
+		<result property="trainingStartdate" 		column="TRAINING_STARTDATE"/>
+		<result property="trainingEnddate" 			column="TRAINING_ENDDATE"/>
+		<result property="trainingAgency" 			column="TRAINING_AGENCY"/>
+	</resultMap>
+	
+	<!-- user 조회 -->
+	<select id="userList" resultMap="userInfo">
+		SELECT *
+		FROM USER_INFO	
+		ORDER BY 1 ASC
+	</select>
+	
+	<!-- user리스트에서 불러오기 -->
+	<select id="userInfoDetail" resultType="userInfo">
+		SELECT
+			USER_NAME as userName,
+			USER_SOCIAL_SECUNUM as userSocialSecunum,
+			USER_SEX as userGender,
+			USER_COMP as userComp,
+			to_char(USER_COMP_ENTERDATE,'yyyy-mm-dd') as userCompEnterdate,
+			USER_DEPT as userDept,
+			USER_SPOT as userSpot,
+			USER_ARMY_SERV as userArmyServ,
+			USER_MARITAL_STATUS as userMaritalStatus,
+			to_char(USER_ARMY_SERV_ENTER,'yyyy-mm-dd') as userArmyServEnter,
+			to_char(USER_ARMY_SERV_LEAVE,'yyyy-mm-dd') as userArmyServLeave,
+			USER_ARMY_SERV_PERIOD as userArmyServPeriod,
+			USER_TELNUM_WIRED as userTelnumWired,
+			USER_TELNUM_WIRELESS as userTelnumWireless,
+			USER_EMAIL as userEmail,
+			USER_ZIPCODE as userZipcode,
+			USER_ADDRESS as userAddress
+		FROM 
+			USER_INFO
+		WHERE
+			USER_IDX = #{userIdx }
+	</select>
+		
+	<select id="userInfoCareer" resultType="userInfoCareer">
+		SELECT 
+			CAREER_IDX as careerIdx,
+			USER_IDX as userIdx,
+			CAREER_COMP_NAME as careerCompName,
+			to_char(CAREER_ENTERDATE,'yyyy-mm-dd') as careerEnterdate,
+			to_char(CAREER_LEAVEDATE,'yyyy-mm-dd') as careerLeavedate,
+			CAREER_SPOT as careerSpot,
+			CAREER_RESPONSIB as careerResponsib
+		FROM 
+			USER_INFO_CAREER
+		WHERE
+			USER_IDX = #{userIdx }
+	</select>
+	
+	<select id="userInfoEdu" resultType="userInfoEdu">
+		SELECT
+			EDU_IDX as eduIdx,
+			USER_IDX as userIdx,
+			EDU_SCHOOL_NAME as eduSchoolName,
+			EDU_STATUS as eduStatus,
+			to_char(EDU_DATE,'yyyy-mm-dd') as eduDate
+		FROM
+			USER_INFO_EDU
+		WHERE
+			USER_IDX = #{userIdx }
+	</select>
+	
+	<select id="userInfoQualifi" resultType="userInfoQualifi">
+		SELECT 
+			QUALIFI_IDX as qualifiIdx,
+			USER_IDX as userIdx,
+			QUALIFI_NAME as qualifiName,
+			to_char(QUALIFI_GETDATE,'yyyy-mm-dd') as qualifiGetdate
+		FROM
+			USER_INFO_QUALIFI
+		WHERE
+			USER_IDX = #{userIdx}
+	</select>
+	
+	<select id="userInfoTraining" resultType="userInfoTraining">
+		SELECT
+			TRAINING_IDX as trainingIdx,
+			USER_IDX as userIdx,
+			TRAINING_NAME as trainingName,
+			to_char(TRAINING_STARTDATE,'yyyy-mm-dd') as trainingStartdate,
+			to_char(TRAINING_ENDDATE,'yyyy-mm-dd') as trainingEnddate,
+			TRAINING_AGENCY as trainingAgency
+		FROM
+			USER_INFO_TRAINING
+		WHERE
+			USER_IDX = #{userIdx}
+	</select>
+	
+	<select id="userInfoLicen" resultType="userInfoLicen">
+		SELECT
+			LICEN_IDX as licenIdx,
+			USER_IDX as userIdx,
+			LICEN_NAME as licenName,
+			LICEN_SKILL_LEVEL as licenSkillLevel
+		FROM
+			USER_INFO_LICEN
+		WHERE
+			USER_IDX = #{userIdx}
+	</select>
+	
+	<select id="userInfoProject" resultType="userInfoProject">
+		SELECT
+			SKILL_IDX as skillIdx,
+			USER_IDX as userIdx,
+			SKILL_PROJECT_NAME as skillProjectName,
+			to_char(SKILL_STARTDATE,'yyyy-mm-dd') as skillStartdate,
+			to_char(SKILL_ENDDATE,'yyyy-mm-dd') as skillEnddate,
+			SKILL_CUSTOMER_COMP as skillCustomerComp,
+			SKILL_WORK_COMP as skillWorkComp,
+			SKILL_APPLIED as skillApplied,
+			SKILL_INDUSTRY as skillIndustry,
+			SKILL_ROLE as skillRole,
+			SKILL_MODEL as skillModel,
+			SKILL_OS as skillOs,
+			SKILL_LANG as skillLang,
+			SKILL_DBMS as skillDbms,
+			SKILL_COMM as skillComm,
+			SKILL_TOOL as skillTool,
+			SKILL_ETC as skillEtc
+		FROM
+			USER_INFO_SKILL
+		WHERE
+			USER_IDX = #{userIdx}
+	</select>
+	
+	<select id="userInfoResult" resultType="userInfo">
+		SELECT 
+			USER_IDX as userIdx
+		FROM
+			USER_INFO
+		WHERE
+			USER_SOCIAL_SECUNUM = #{userSocialSecunum}
+	</select>
+	
+	
+	<!-- 들어오는 것은 parameterType 나가는 것은 resultType id는 식별자, insert는 resultType 생략 -->
+	<insert id="userInfoInsert" parameterType="userInfo">
+		INSERT INTO
+			USER_INFO
+		VALUES
+		(
+			(SELECT NVL(MAX(USER_IDX),0)+1 FROM USER_INFO),
+			SYSDATE,
+			#{userName},
+			#{userSocialSecunum},
+			#{userGender},
+			#{userComp},
+			#{userCompEnterdate},
+			#{userDept},
+			#{userSpot},
+			#{userArmyServ},
+			#{userMaritalStatus},
+			#{userArmyServEnter},
+			#{userArmyServLeave},
+			#{userArmyServPeriod},
+			#{userTelnumWired},
+			#{userTelnumWireless},
+			#{userEmail},
+			#{userZipcode},
+			#{userAddress}
+		)
+	</insert>
+	
+	<insert id="userInfoSchoolInsert" parameterType="userInfoEdu">
+		INSERT INTO
+			USER_INFO_EDU
+		VALUES
+		(
+			(SELECT NVL(MAX(EDU_IDX),0)+1 FROM USER_INFO_EDU),
+			#{userIdx},
+			#{eduSchoolName},
+			#{eduStatus},
+			#{eduDate}
+		)
+	</insert>
+	
+	<insert id="userInfoQualifiInsert" parameterType="userInfoQualifi">
+		INSERT INTO
+			USER_INFO_QUALIFI
+		VALUES
+		(
+			(SELECT NVL(MAX(QUALIFI_IDX),0)+1 FROM USER_INFO_QUALIFI),
+			#{userIdx},
+			#{qualifiName},
+			#{qualifiGetdate}
+		)
+	</insert>
+	
+	<insert id="userInfoCareerInsert" parameterType="userInfoCareer">
+		INSERT INTO
+			USER_INFO_CAREER
+		VALUES
+		(
+			(SELECT NVL(MAX(CAREER_IDX),0)+1 FROM USER_INFO_CAREER),
+			#{userIdx},
+			#{careerCompName},
+			#{careerEnterdate},
+			#{careerLeavedate},
+			#{careerSpot},
+			#{careerResponsib}
+		)
+	</insert>
+	
+	<insert id="userInfoTrainingInsert" parameterType="userInfoTraining">
+		INSERT INTO
+			USER_INFO_TRAINING
+		VALUES
+		(
+			(SELECT NVL(MAX(TRAINING_IDX),0)+1 FROM USER_INFO_TRAINING),
+			#{userIdx},
+			#{trainingName},
+			#{trainingStartdate},
+			#{trainingEnddate},
+			#{trainingAgency}
+		)
+	</insert>
+	
+	<insert id="userInfoLicenInsert" parameterType="userInfoLicen">
+		INSERT INTO
+			USER_INFO_LICEN
+		VALUES
+		(
+			(SELECT NVL(MAX(LICEN_IDX),0)+1 FROM USER_INFO_LICEN),
+			#{userIdx},
+			#{licenName},
+			#{licenSkillLevel}
+		)
+	</insert>
+	
+	<insert id="userInfoProjectInsert" parameterType="userInfoProject">
+		INSERT INTO
+			USER_INFO_SKILL
+		VALUES
+		(
+			(SELECT NVL(MAX(SKILL_IDX),0)+1 FROM USER_INFO_SKILL),
+			#{userIdx},
+			#{skillProjectName},
+			#{skillStartdate},
+			#{skillEnddate},
+			#{skillCustomerComp},
+			#{skillWorkComp},
+			#{skillApplied},
+			#{skillIndustry},
+			#{skillRole},
+			#{skillModel},
+			#{skillOs},
+			#{skillLang},
+			#{skillDbms},
+			#{skillComm},
+			#{skillTool},
+			#{skillEtc}
+		)
+	</insert>
+	
+	<!-- 정보 수정 파트 -->
+	<update id="userInfoUpdate" parameterType="userInfo">
+		UPDATE USER_INFO
+		SET 
+			USER_NAME = #{userName},
+			USER_SOCIAL_SECUNUM = #{userSocialSecunum},
+			USER_SEX = #{userGender},
+			USER_COMP = #{userComp},
+			USER_COMP_ENTERDATE = #{userCompEnterdate},
+			USER_DEPT = #{userDept},
+			USER_SPOT = #{userSpot},
+			USER_ARMY_SERV = #{userArmyServ},
+			USER_MARITAL_STATUS = #{userMaritalStatus},
+			USER_ARMY_SERV_ENTER = #{userArmyServEnter},
+			USER_ARMY_SERV_LEAVE = #{userArmyServLeave},
+			USER_ARMY_SERV_PERIOD = #{userArmyServPeriod},
+			USER_TELNUM_WIRED = #{userTelnumWired},
+			USER_TELNUM_WIRELESS = #{userTelnumWireless},
+			USER_EMAIL = #{userEmail},
+			USER_ZIPCODE = #{userZipcode},
+			USER_ADDRESS = #{userAddress}
+		WHERE 
+			USER_IDX = #{userIdx}
+	</update>
+	
+	<update id="userInfoSchoolUpdate" parameterType="userInfoEdu">
+		UPDATE USER_INFO_EDU
+		SET 
+			EDU_SCHOOL_NAME = #{eduSchoolName},
+			EDU_STATUS = #{eduStatus},
+			EDU_DATE = #{eduDate}
+		WHERE 
+			USER_IDX = #{userIdx} and EDU_IDX = #{eduIdx}
+	</update>
+	
+	<update id="userInfoQualifiUpdate" parameterType="userInfoQualifi">
+		UPDATE USER_INFO_QUALIFI
+		SET 
+			QUALIFI_NAME = #{qualifiName},
+			QUALIFI_GETDATE = #{qualifiGetdate}
+		WHERE 
+			USER_IDX = #{userIdx}
+	</update>
+	
+	<update id="userInfoCareerUpdate" parameterType="userInfoEdu">
+		UPDATE USER_INFO_CAREER
+		SET 
+			CAREER_COMP_NAME = #{careerCompName},
+			CAREER_ENTERDATE = #{careerEnterdate},
+			CAREER_LEAVEDATE = #{careerLeavedate},
+			CAREER_SPOT = #{careerSpot},
+			CAREER_RESPONSIB = #{careerResponsib}
+		WHERE 
+			USER_IDX = #{userIdx}
+	</update>
+	
+	<update id="userInfoTrainingUpdate" parameterType="userInfoTraining">
+		UPDATE USER_INFO_TRAINING
+		SET
+			TRAINING_NAME = #{trainingName},
+			TRAINING_STARTDATE = #{trainingStartdate},
+			TRAINING_ENDDATE = #{trainingEnddate},
+			TRAINING_AGENCY = #{trainingAgency}
+		WHERE
+			USER_IDX = #{userIdx}
+	</update>
+	
+	<update id="userInfoLicenUpdate" parameterType="userInfoLicen">
+		UPDATE USER_INFO_LICEN
+		SET
+			LICEN_NAME = #{licenName},
+			LICEN_SKILL_LEVEL = #{licenSkillLevel}
+		WHERE
+			USER_IDX = #{userIdx}
+	</update>
+	
+	<update id="userInfoProjectUpdate" parameterType="userInfoProject">
+		UPDATE USER_INFO_SKILL
+		SET
+			SKILL_PROJECT_NAME = #{skillProjectName},
+			SKILL_STARTDATE = #{skillStartdate},
+			SKILL_ENDDATE = #{skillEnddate},
+			SKILL_CUSTOMER_COMP = #{skillCustomerComp},
+			SKILL_WORK_COMP = #{skillWorkComp},
+			SKILL_APPLIED = #{skillApplied},
+			SKILL_INDUSTRY = #{skillIndustry},
+			SKILL_ROLE = #{skillRole},
+			SKILL_MODEL = #{skillModel},
+			SKILL_OS = #{skillOs},
+			SKILL_LANG = #{skillLang},
+			SKILL_DBMS = #{skillDbms},
+			SKILL_COMM = #{skillComm},
+			SKILL_TOOL = #{skillTool},
+			SKILL_ETC = #{skillEtc}
+		WHERE
+			USER_IDX = #{userIdx}
+	</update>
+	
+	
+	<!-- (+)버튼 활성화 구현전 조회 기능 -->
+	<select id="userInfoEduListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_EDU
+		WHERE
+			EDU_IDX = #{eduIdx }
+	</select>
+	
+	<select id="userInfoQualifiListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_QUALIFI
+		WHERE
+			QUALIFI_IDX = #{qualifiIdx }
+	</select>
+	
+	<select id="userInfoCareerListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_CAREER
+		WHERE
+			CAREER_IDX = #{careerIdx }
+	</select>
+	
+	<select id="userInfoTrainingListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_TRAINING
+		WHERE
+			TRAINING_IDX = #{trainingIdx }
+	</select>
+	
+	<select id="userInfoLicenListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_LICEN
+		WHERE
+			LICEN_IDX = #{licenIdx }
+	</select>
+	
+	<select id="userInfoProjectListCtn" resultType="String">
+		SELECT
+			*
+		FROM
+			USER_INFO_SKILL
+		WHERE
+			SKILL_IDX = #{skillIdx }
+	</select>
+	
+	
+	<!-- -버튼을 위한 삭제 요청 -->
+	<delete id="userInfoMinSchoolDelete">
+		DELETE FROM USER_INFO_EDU
+		WHERE
+			EDU_IDX = #{eduIdx}
+	</delete>
+	
+	<delete id="userInfoMinQualifiDelete">
+		DELETE FROM USER_INFO_QUALIFI
+		WHERE
+			QUALIFI_IDX  = #{qualifiIdx}
+	</delete>
+	
+	<delete id="userInfoMinCareerDelete">
+		DELETE FROM USER_INFO_CAREER
+		WHERE
+			CAREER_IDX = #{careerIdx }
+	</delete>
+	
+	<delete id="userInfoMinTrainingDelete">
+		DELETE FROM USER_INFO_TRAINING
+		WHERE
+			TRAINING_IDX = #{trainingIdx }
+	</delete>
+	
+	<delete id="userInfoMinLicenDelete">
+		DELETE FROM USER_INFO_LICEN
+		WHERE
+			LICEN_IDX = #{licenIdx }
+	</delete>
+	
+	<delete id="userInfoMinProjectDelete">
+		DELETE FROM USER_INFO_SKILL
+		WHERE
+			SKILL_IDX = #{skillIdx }
+	</delete>
+	
+	
+	<!-- 삭제 요청 -->
+	<delete id="userInfoDelete">
+		DELETE FROM USER_INFO
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoSchoolDelete">
+		DELETE FROM USER_INFO_EDU
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoQualifiDelete">
+		DELETE FROM USER_INFO_QUALIFI
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoCareerDelete">
+		DELETE FROM USER_INFO_CAREER
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoTrainingDelete">
+		DELETE FROM USER_INFO_TRAINING
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoLicenDelete">
+		DELETE FROM USER_INFO_LICEN
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+	<delete id="userInfoProjectDelete">
+		DELETE FROM USER_INFO_SKILL
+		WHERE
+			USER_IDX = #{userIdx}
+	</delete>
+	
+</mapper>
